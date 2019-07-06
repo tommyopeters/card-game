@@ -17,15 +17,6 @@ function createRandom(flo,index){
 
 
 
-let container = document.querySelectorAll('.card-container');
-
-for(let i=0; i<container.length; i++){
-    let content = container[i];
-    content.addEventListener('click', ()=>{
-        content.classList.toggle('flipped');
-    })
-}
-
 //Create Deck function to hold 
 class Deck{
     constructor(){
@@ -53,14 +44,7 @@ class Deck{
     }
 
     printDeck(){
-        if (this.deck.length == 0){
-            console.log('no deck has been generated')
-        }
-        else{
-            for (let c = 0; c < this.deck.length; c++){
-                console.log(this.deck[c].name);
-            }
-        }
+        
     }
 
     shuffle(){
@@ -90,14 +74,5 @@ class Deck{
     }
 }
 
-
-let PlayerDeck = new Deck();
-PlayerDeck.generateDeck();
-PlayerDeck.shuffle();
-
-
-let DealerDeck = new Deck();
-DealerDeck.generateDeck();
-DealerDeck.shuffle();
 
 

@@ -125,3 +125,12 @@
   80% { transform:translate(-3%, -35%) }
   90% { transform:translate(-10%, -10%) }
 }
+
+@keyframes zoomin{
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
