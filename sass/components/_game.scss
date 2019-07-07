@@ -1,13 +1,14 @@
 #game{
     width: 100vw;
     height: 100vh;
-    position: relative;
+    position: fixed;
 
     .startgame{
-        // position: absolute;
-        // top: 50%;
-        // left: 50%;
-        // transform: translate(-50%,-50%);
+        position: absolute;
+        transform-origin: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
         margin: auto auto;
         border: 1rem solid $light-green ;
         width: 80rem;
@@ -62,6 +63,7 @@
 }
 
 .zoomin{
+    transform-origin: center;
     animation: zoomin 500ms ease-in;
 }
 
@@ -79,9 +81,14 @@
         // left: 50%;
         // transform: translate(-50%,-50%);
         margin: auto auto;
-        margin-top: 35rem;
+
+        //MEDIA QUERY NEEDED
+        // margin-top: 35rem;
+        margin-top: 40rem;
         border: 1rem solid $light-green ;
-        width: 80rem;
+        
+        // width: 80rem;
+        width: 90rem;
         height: 45rem;
         border-radius: 2rem;
         background-color: $board-green;
@@ -103,7 +110,7 @@
                 width: 10rem;
             }
             .dealer{
-                // border-right: 0.6rem solid $light-green;
+                border-right: 0.6rem solid $light-green;
             }
             .score{
                 align-self: center;
@@ -113,22 +120,23 @@
                 color: white;
                 -webkit-text-stroke-color: $light-green;
                 -webkit-text-stroke-width: 0.3rem;
+                letter-spacing: 0.6rem;
             }
         }
         .player-bar{
                 // background-color: blue;
                 height: 100%;
                 margin-left: 2rem;
-                padding-top: 2rem;
                 border-top: 0.3rem solid $light-green;
                 display: grid;
                 grid-template-columns: 12rem 1fr 6rem;
 
                 svg{
                     width: 10rem;
+                    padding-top: 2rem;
                 }
                 .player{
-                    // border-right: 0.6rem solid $light-green;
+                    border-right: 0.6rem solid $light-green;
                 }
                 .score{
                     align-self: center;
@@ -138,10 +146,28 @@
                     color: white;
                     -webkit-text-stroke-color: $light-green;
                     -webkit-text-stroke-width: 0.3rem;
+                    letter-spacing: 0.6rem;
+                }
+                .carddiv{
+                    margin-top: 0.5rem;
                 }
         }
-        .actions{
-            // background-color: yellow;
-                height: 100%;
+}
+.actions{
+        // background-color: yellow;
+        height: 100%;
+        margin: auto auto;
+
+
+        .prebet, .postbet{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 2rem;
+            // background-color: blue;
+            align-items: center;
+            justify-items: center;
+            padding-top: 2rem;
+
         }
+        
 }

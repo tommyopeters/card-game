@@ -113,6 +113,12 @@
   100% {
     transform: scale(1); } }
 
+@keyframes rotate-right {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 *,
 *::after,
 *::before {
@@ -160,6 +166,17 @@ input[type=submit]:hover {
   .btn-blue {
     background-color: #1DA1F2;
     color: white; }
+
+.button {
+  display: inline-block;
+  border: 0.5rem solid #9BCC9B;
+  border-radius: 1rem;
+  font-family: Coegit;
+  font-size: 3.4rem;
+  color: #9BCC9B;
+  padding: 0.5rem 0.8rem; }
+  .button:hover {
+    cursor: pointer; }
 
 /*
 .card-container{
@@ -256,7 +273,7 @@ input[type=submit]:hover {
   height: 14rem;
   background-color: white;
   transform-style: preserve-3d;
-  border: 0.5rem solid #5E995E;
+  border: 0.5rem solid #C5EBC5;
   border-radius: 1.5rem;
   transition: all 0.5s ease-in-out; }
 
@@ -305,14 +322,14 @@ input[type=submit]:hover {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(0deg, #000 0, #000 1.5rem, #fff 1.5rem, #fff 3rem);
+    background: repeating-linear-gradient(0deg, #000 0, #000 1rem, #fff 1rem, #fff 2rem);
     border-radius: 1.5rem; }
   .back:after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(90deg, #000 0, #000 1.5rem, #fff 1.5rem, #fff 3rem);
+    background: repeating-linear-gradient(90deg, #000 0, #000 1rem, #fff 1rem, #fff 2rem);
     border-radius: 1.5rem;
     mix-blend-mode: difference; }
   .back .back-inner {
@@ -320,7 +337,7 @@ input[type=submit]:hover {
     z-index: 2;
     width: 100%;
     height: 100%;
-    background-color: #5e995e;
+    background-color: #C5EBC5;
     mix-blend-mode: screen; }
 
 .carddiv {
@@ -347,8 +364,13 @@ input[type=submit]:hover {
 #game {
   width: 100vw;
   height: 100vh;
-  position: relative; }
+  position: fixed; }
   #game .startgame {
+    position: absolute;
+    transform-origin: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin: auto auto;
     border: 1rem solid #C5EBC5;
     width: 80rem;
@@ -388,6 +410,7 @@ input[type=submit]:hover {
   position: absolute; }
 
 .zoomin {
+  transform-origin: center;
   animation: zoomin 500ms ease-in; }
 
 .hidden {
@@ -398,9 +421,9 @@ input[type=submit]:hover {
 
 .people {
   margin: auto auto;
-  margin-top: 35rem;
+  margin-top: 40rem;
   border: 1rem solid #C5EBC5;
-  width: 80rem;
+  width: 90rem;
   height: 45rem;
   border-radius: 2rem;
   background-color: #5e995e;
@@ -415,6 +438,8 @@ input[type=submit]:hover {
     grid-template-columns: 12rem 1fr 6rem; }
     .people .dealer-bar svg {
       width: 10rem; }
+    .people .dealer-bar .dealer {
+      border-right: 0.6rem solid #C5EBC5; }
     .people .dealer-bar .score {
       align-self: center;
       justify-self: center;
@@ -422,16 +447,19 @@ input[type=submit]:hover {
       font-size: 5rem;
       color: white;
       -webkit-text-stroke-color: #C5EBC5;
-      -webkit-text-stroke-width: 0.3rem; }
+      -webkit-text-stroke-width: 0.3rem;
+      letter-spacing: 0.6rem; }
   .people .player-bar {
     height: 100%;
     margin-left: 2rem;
-    padding-top: 2rem;
     border-top: 0.3rem solid #C5EBC5;
     display: grid;
     grid-template-columns: 12rem 1fr 6rem; }
     .people .player-bar svg {
-      width: 10rem; }
+      width: 10rem;
+      padding-top: 2rem; }
+    .people .player-bar .player {
+      border-right: 0.6rem solid #C5EBC5; }
     .people .player-bar .score {
       align-self: center;
       justify-self: center;
@@ -439,9 +467,137 @@ input[type=submit]:hover {
       font-size: 5rem;
       color: white;
       -webkit-text-stroke-color: #C5EBC5;
-      -webkit-text-stroke-width: 0.3rem; }
-  .people .actions {
-    height: 100%; }
+      -webkit-text-stroke-width: 0.3rem;
+      letter-spacing: 0.6rem; }
+    .people .player-bar .carddiv {
+      margin-top: 0.5rem; }
+
+.actions {
+  height: 100%;
+  margin: auto auto; }
+  .actions .prebet, .actions .postbet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    align-items: center;
+    justify-items: center;
+    padding-top: 2rem; }
+
+.chipstable {
+  transform-origin: center;
+  transform: translateX(-50%) scale(0.5);
+  position: absolute;
+  left: 50%;
+  top: 78rem;
+  width: 50%; }
+
+.chips {
+  margin: 0 5rem;
+  padding: 2rem 0;
+  text-align: center;
+  background-color: #014D43;
+  box-shadow: 0 0 0 0.5rem #282828 inset, 0 0 0 1rem #969696 inset, 0 0 0.6rem rgba(255, 255, 255, 0.2); }
+
+.pokerchip {
+  margin: 1em;
+  position: relative;
+  display: inline-block;
+  width: 15.1rem;
+  height: 15.1rem;
+  box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.5), 0 0 0.3rem 0 rgba(0, 0, 0, 0.4) inset;
+  border-radius: 50%;
+  background-size: 15.1rem 15.1rem;
+  background-position: center center; }
+  .pokerchip:hover {
+    animation: rotate-right 2s linear infinite;
+    cursor: pointer; }
+
+.pokerchip:before {
+  position: absolute;
+  content: "";
+  z-index: 1;
+  width: 13.1rem;
+  height: 13.1rem;
+  border-radius: 50%;
+  top: 1rem;
+  left: 1rem;
+  background-size: 15.1rem 15.1rem;
+  background-position: center center; }
+
+.pokerchip:after {
+  z-index: 2;
+  position: absolute;
+  content: "25";
+  text-align: center;
+  font: bold 5rem/11.1rem Arial;
+  white-space: pre;
+  width: 111px;
+  height: 111px;
+  border-radius: 50%;
+  top: 20px;
+  left: 20px;
+  text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3), 1px 1px 0px rgba(255, 255, 255, 0.2); }
+
+/* Colors */
+.white {
+  background-image: linear-gradient(0deg, transparent 0, transparent 67.5px, #fff 67.5px, #fff 83.5px, transparent 83.5px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 97.4304px, #fff 97.4304px, #fff 113.4304px, transparent 113.4304px, transparent 151px), linear-gradient(120deg, #dddddd 0, #dddddd 97.4304px, #fff 97.4304px, #fff 113.4304px, #dddddd 113.4304px, #dddddd 151px); }
+
+.white:before {
+  border: 8px solid #dddddd;
+  background-image: linear-gradient(0deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(30deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(90deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(120deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(150deg, #C1C1C1 0, #C1C1C1 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, #C1C1C1 110.7104px, #C1C1C1 151px); }
+
+.white:after {
+  content: "$1";
+  background: #dddddd;
+  color: #7c7a7a; }
+
+.red {
+  background-image: linear-gradient(0deg, transparent 0, transparent 67.5px, #fff 67.5px, #fff 83.5px, transparent 83.5px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 97.4304px, #fff 97.4304px, #fff 113.4304px, transparent 113.4304px, transparent 151px), linear-gradient(120deg, #800000 0, #800000 97.4304px, #fff 97.4304px, #fff 113.4304px, #800000 113.4304px, #800000 151px); }
+
+.red:before {
+  border: 8px solid #800000;
+  background-image: linear-gradient(0deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(30deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(90deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(120deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(150deg, #6C0000 0, #6C0000 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, #6C0000 110.7104px, #6C0000 151px); }
+
+.red:after {
+  content: "$5";
+  background: #800000;
+  color: #420202; }
+
+.blue {
+  background-image: linear-gradient(0deg, transparent 0, transparent 67.5px, #fff 67.5px, #fff 83.5px, transparent 83.5px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 97.4304px, #fff 97.4304px, #fff 113.4304px, transparent 113.4304px, transparent 151px), linear-gradient(120deg, #000099 0, #000099 97.4304px, #fff 97.4304px, #fff 113.4304px, #000099 113.4304px, #000099 151px); }
+
+.blue:before {
+  border: 8px solid #000099;
+  background-image: linear-gradient(0deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(30deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(90deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(120deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(150deg, #00016C 0, #00016C 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, #00016C 110.7104px, #00016C 151px); }
+
+.blue:after {
+  content: "$10";
+  background: #000099;
+  color: #00013d; }
+
+.green {
+  background-image: linear-gradient(0deg, transparent 0, transparent 67.5px, #fff 67.5px, #fff 83.5px, transparent 83.5px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 97.4304px, #fff 97.4304px, #fff 113.4304px, transparent 113.4304px, transparent 151px), linear-gradient(120deg, #008000 0, #008000 97.4304px, #fff 97.4304px, #fff 113.4304px, #008000 113.4304px, #008000 151px); }
+
+.green:before {
+  border: 8px solid #008000;
+  background-image: linear-gradient(0deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(30deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(90deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(120deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(150deg, #016C00 0, #016C00 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, #016C00 110.7104px, #016C00 151px); }
+
+.green:after {
+  content: "$25";
+  background: #008000;
+  color: #023601; }
+
+.black {
+  background-image: linear-gradient(0deg, transparent 0, transparent 67.5px, #fff 67.5px, #fff 83.5px, transparent 83.5px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 97.4304px, #fff 97.4304px, #fff 113.4304px, transparent 113.4304px, transparent 151px), linear-gradient(120deg, #222222 0, #222222 97.4304px, #fff 97.4304px, #fff 113.4304px, #222222 113.4304px, #222222 151px); }
+
+.black:before {
+  border: 8px solid #222222;
+  background-image: linear-gradient(0deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(30deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(60deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(90deg, transparent 0, transparent 69.5px, #EBEBEB 69.5px, #EBEBEB 81.5px, transparent 81.5px, transparent 151px), linear-gradient(120deg, transparent 0, transparent 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, transparent 110.7104px, transparent 151px), linear-gradient(150deg, #000000 0, #000000 98.7104px, #EBEBEB 98.7104px, #EBEBEB 110.7104px, #000000 110.7104px, #000000 151px); }
+
+.black:after {
+  content: "$100";
+  background: #222222;
+  color: #000000; }
 
 .tableSVG {
   position: absolute;
