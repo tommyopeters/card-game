@@ -23,18 +23,3 @@ input[type=submit]{
         color: white;
     }
 }
-
-.button{
-    display: inline-block;
-    border: 0.5rem solid $medium-green;
-    border-radius: 1rem;
-    font-family: Coegit;
-    font-size: 3.4rem;
-    color: $medium-green;
-    padding: 0.5rem 0.8rem;
-
-    &:hover{
-        cursor: pointer;
-    }
-
-}
