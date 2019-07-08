@@ -90,7 +90,12 @@
 .flipped{
     transform: rotateY(180deg);
 }
-
+.unflipped{
+    transform: rotateY(0deg);
+}
+.apply-shakeflipped {
+    animation: shakeflipped 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
 
 
 .cardcontainer{
@@ -101,6 +106,10 @@
     border: 0.5rem solid $light-green;
     border-radius: 1.5rem;
     transition: all 0.5s ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+    }
 
     // transform: rotateY(180deg);
 }
@@ -212,11 +221,11 @@
     }
 }
 
-.red{
+.cardred{
     fill: #e55b5f; 
     color: #e55b5f;
 }
-.green{
+.cardgreen{
     fill: #5e875e; 
     color:#5e875e;
 }

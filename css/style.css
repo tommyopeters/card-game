@@ -141,7 +141,19 @@
   20%, 80% {
     transform: translate3d(2px, 0, 0); }
   30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0); } }
+    transform: translate3d(-4px, 0, 0); }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0); } }
+
+@keyframes shakeflipped {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0) rotateY(180deg); }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0) rotateY(180deg); }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0) rotateY(180deg); }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0) rotateY(180deg); } }
 
 *,
 *::after,
@@ -296,6 +308,12 @@ input[type=submit]:hover {
 .flipped {
   transform: rotateY(180deg); }
 
+.unflipped {
+  transform: rotateY(0deg); }
+
+.apply-shakeflipped {
+  animation: shakeflipped 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+
 .cardcontainer {
   width: 9rem;
   height: 14rem;
@@ -304,6 +322,8 @@ input[type=submit]:hover {
   border: 0.5rem solid #C5EBC5;
   border-radius: 1.5rem;
   transition: all 0.5s ease-in-out; }
+  .cardcontainer:hover {
+    cursor: pointer; }
 
 .front {
   position: relative;
@@ -381,11 +401,11 @@ input[type=submit]:hover {
     border-radius: 1.5rem;
     margin-bottom: 0.5rem; }
 
-.red {
+.cardred {
   fill: #e55b5f;
   color: #e55b5f; }
 
-.green {
+.cardgreen {
   fill: #5e875e;
   color: #5e875e; }
 

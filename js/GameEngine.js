@@ -1,28 +1,96 @@
 class GameEngine{
     constructor(){
         this.score = 0;
+        this.cardinhand = 0;
+    }
+    printcard(index){
+        let emptycards = document.getElementsByClassName('empty');
+        let dealerempty = emptycards[index];
+        let playerempty = emptycards[index+6];
+        let playercard = this.Player.deal();
+        let dealercard = this.Dealer.deal();
         
+        let HTMLcardDealer = document.createElement('div');
+        HTMLcardDealer.classList.add('cardcontainer');
+        if(dealercard.suit == 'spadesuit' || dealercard.suit == 'clubsuit'){
+            HTMLcardDealer.classList.add('cardgreen');
+        }else{
+            HTMLcardDealer.classList.add('cardred');
+        }
+        HTMLcardDealer.classList.add('flipped');
+        HTMLcardDealer.innerHTML = `
+            <div class="front">
+                <div class="top">
+                    <span> &${dealercard.suit}; </span>
+                </div>
+                <h1>${dealercard.value}</h1>
+                <div class="bottom">
+                    <span class="upside-down"> &${dealercard.suit}; </span>
+                </div>
+            </div>
+            <div class="back"><div class="back-inner"></div></div>
+        `;
+        dealerempty.parentNode.replaceChild(HTMLcardDealer, dealerempty);
+            
+
+
+        let HTMLcardPlayer = document.createElement('div');
+        HTMLcardPlayer.classList.add('cardcontainer');
+        if(playercard.suit == 'spadesuit' || playercard.suit == 'clubsuit'){
+            HTMLcardPlayer.classList.add('cardgreen');
+        }else{
+            HTMLcardPlayer.classList.add('cardred');
+        }
+        HTMLcardPlayer.classList.add('flipped');
+        HTMLcardPlayer.innerHTML = `
+            <div class="front">
+                <div class="top">
+                    <span class="upside-up"> &${playercard.suit}; </span>
+                </div>
+                <h1 class="cardvalue">${playercard.value}</h1>
+                <div class="bottom">
+                    <span class="upside-down"> &${playercard.suit}; </span>
+                </div>
+            </div>
+            <div class="back"><div class="back-inner"></div></div>
+        `;
+        playerempty.parentNode.replaceChild(HTMLcardPlayer, playerempty);
+
+        HTMLcardPlayer.addEventListener('click', (e)=>{
+            let clicked = e.target;
+            console.log(e.target);
+            if(clicked.classList.contains('cardcontainer')){
+                clicked.classList.toggle('flipped');
+            }else if(clicked.parentNode.classList.contains('cardcontainer')){
+                clicked.parentNode.classList.toggle('flipped');
+            }else if(clicked.parentNode.parentNode.classList.contains('cardcontainer')){
+                clicked.parentNode.parentNode.classList.toggle('flipped');
+            }else if(clicked.parentNode.parentNode.parentNode.classList.contains('cardcontainer')){
+                clicked.parentNode.parentNode.parentNode.classList.toggle('flipped');
+            }
+            
+        })
+
+        this.cardinhand++;
     }
 
     start(){
-        gameDiv.innerHTML = `
-            <div class="dealer"></div>
-            <div class="player"></div>
-        `
+        this.Player = new Deck();
+        this.Player.generateDeck();
+        this.Player.shuffle();
+
+
+        this.Dealer = new Deck();
+        this.Dealer.generateDeck();
+        this.Dealer.shuffle();
+
+        this.printcard(this.cardinhand);
     }
 }
 
-let PlayerDeck = new Deck();
-PlayerDeck.generateDeck();
-PlayerDeck.shuffle();
 
-
-let DealerDeck = new Deck();
-DealerDeck.generateDeck();
-DealerDeck.shuffle();
 
 let Game = new GameEngine;
-// Game.start();
 
 //REMOVE .STARTGAME TO START GAME
 fadeOut('.startgame', 1, '.yes');
@@ -52,7 +120,6 @@ document.querySelector('.reset').addEventListener('click', ()=>{
 
 
 //INCREMENT AMOUNT BET VALUE BY POKERCHIP SELECTED
-
 for(let i=0; i<pokerchips.length; i++){
     pokerchips[i].addEventListener('click', ()=>{
         
@@ -86,6 +153,7 @@ for(let i=0; i<pokerchips.length; i++){
 }
 
 //REMOVE CHIPS TABLE AND REPLACE PREBET WITH POSTBET WHEN BET HAS BEEN MADE
+//START GAME
 document.querySelector('.bet').addEventListener('click', ()=>{
     if(amountbet==0){
         document.querySelector('.bet').classList.add('apply-shake');
@@ -97,6 +165,28 @@ document.querySelector('.bet').addEventListener('click', ()=>{
         document.querySelector('.prebet').style.display= "none";
         document.querySelector('.postbet').classList.remove('hidden');
         document.querySelector('.chipstable').style.display = "none";
+
+        Game.start();
+
     }
 })
 
+//FLIPCARDS WHEN SELECTED
+// document.querySelector('.people').addEventListener('click', (e)=>{
+//     clicked = e.target;
+//     //Check for 
+//     if(clicked.classList.contains('cardcontainer')){
+//         clicked.classList.add('flipped');
+//     }else if(clicked.parentNode.classList.contains('cardcontainer')){
+//         clicked.parentNode.classList.add('flipped');
+//     }else if(clicked.parentNode.parentNode.classList.contains('cardcontainer')){
+//         clicked.parentNode.parentNode.classList.add('flipped');
+//     }else if(clicked.parentNode.parentNode.parentNode.classList.contains('cardcontainer')){
+//         clicked.parentNode.parentNode.parentNode.classList.add('flipped');
+//     }
+    
+// })
+
+
+
+document.querySelector('.yes').click();

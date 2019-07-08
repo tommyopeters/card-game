@@ -26,14 +26,12 @@ class Deck{
 
     generateDeck(){
         let values = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-        let suits = ['spades', 'hearts', 'diamonds', 'clubs'] 
+        let suits = ['spadesuit', 'heartsuit', 'diamondsuit', 'clubsuit'] 
         
         let card = (suit, value) => {
-            this.name = value + ' of ' + suit;
-            this.suit = suit;
-            this.value = value;
+            let name = value + ' of ' + suit;
 
-            return {name: this.name, suit: this.suit, value:this.value}
+            return {'name': name, 'suit': suit, 'value':value}
         }
         
         for (let s = 0; s < suits.length; s++){
@@ -64,6 +62,15 @@ class Deck{
         this.dealt_cards.push(dealt_card);
         return dealt_card;
     }
+    // deal (num_cards) {
+    //     let cards = []
+    //     for ( let c = 0; c < num_cards; c++ ) {
+    //             let dealt_card = this.deck.shift();;
+    //             cards.push(dealt_card);
+    //             this.dealt_cards.push(dealt_card);
+    //     };
+    //     return cards;
+    // }   
 
     replace(){
         this.deck.unshift(this.dealt_cards.shift())
