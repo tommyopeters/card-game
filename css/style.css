@@ -79,11 +79,11 @@
 
 @keyframes pulsate {
   0% {
-    opacity: 0.9; }
+    transform: scale(1); }
   50% {
-    opacity: 0.4; }
+    transform: scale(0.5); }
   100% {
-    opacity: 0.9; } }
+    transform: scale(1); } }
 
 @keyframes grainAnimation {
   0%, 100% {
@@ -513,10 +513,9 @@ input[type=submit]:hover {
   position: absolute;
   left: 50%;
   top: 78rem;
-  width: 50%; }
+  width: 40%; }
 
 .chips {
-  margin: 0 5rem;
   padding: 2rem 0;
   text-align: center;
   background-color: #014D43;
