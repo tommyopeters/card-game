@@ -57,37 +57,6 @@ function shakeIt(selector,speed, target=selector){
 let amountbet = 0;
 
 let pokerchips = document.querySelectorAll('.pokerchip');
-    for(let i=0; i<pokerchips.length; i++){
-        pokerchips[i].addEventListener('click', ()=>{
-            
-            if(pokerchips[i].classList.contains('white')){
-                amountbet+=1;
-                if(amountbet>500){amountbet=500};
-                document.getElementById('amount').innerHTML = amountbet;
-            }
-            if(pokerchips[i].classList.contains('red')){
-                amountbet+=5;
-                if(amountbet>500){amountbet=500};
-                document.getElementById('amount').innerHTML = amountbet;
-            }
-            if(pokerchips[i].classList.contains('blue')){
-                amountbet+=10;
-                if(amountbet>500){amountbet=500};
-                document.getElementById('amount').innerHTML = amountbet;
-            }
-            if(pokerchips[i].classList.contains('green')){
-                amountbet+=25;
-                if(amountbet>500){amountbet=500};
-                document.getElementById('amount').innerHTML = amountbet;
-            }
-            if(pokerchips[i].classList.contains('black')){
-                amountbet+=100;
-                if(amountbet>500){amountbet=500};
-                document.getElementById('amount').innerHTML = amountbet;
-            }
-
-        })
-    }
 
 
 
