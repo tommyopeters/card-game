@@ -26,18 +26,33 @@ let htmlCard = `
 
 
 
+
 //FADE OUT FUNCTION
 function fadeOut(selector, speed, target=selector){
     var s = document.querySelector(`${selector}`).style;
     s.opacity = 1;
 
     document.querySelector(`${target}`).addEventListener('click', ()=>{
+        s.opacity = 1;
         (function fade(){(s.opacity-=.01)<0?s.display="none":setTimeout(fade, speed)})();
     })
 };
 
+function shakeIt(selector,speed, target=selector){
+    var s = document.querySelector(`${selector}`);
+    s.style.removeProperty('opacity');
 
-fadeOut('.startgame', 0.1, '.answers');
+    
+
+    document.querySelector(`${target}`).addEventListener('click', ()=>{
+        if(s.classList.contains('zoomin')){s.classList.remove('zoomin');}
+        s.classList.add('apply-shake');
+
+        s.addEventListener("animationend", (e) => {
+            s.classList.remove("apply-shake");
+        })
+    })
+}
 
 
 
