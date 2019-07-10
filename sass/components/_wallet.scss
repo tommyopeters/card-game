@@ -1,0 +1,128 @@
+.wallet{
+    width: 25rem;
+    background-color: $money-dark-green;
+    position: fixed;
+    top: 13rem; 
+    left: 10rem;
+    height: 14rem;
+    font-family: Coegit;
+    font-size: 6rem;
+    text-align: center;
+    line-height: 15rem;
+
+    &-inset{
+        position: relative;
+        overflow: hidden;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%) scale(0.8);
+        background-color: $money-light-green;
+        margin: auto;
+
+        &:before{
+            content: "";
+            display: block;
+            background: $money-dark-green;
+            position: absolute;
+            top: -1.9rem;
+            left: -1.9rem;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 4rem;
+        }
+        &:after{
+            content: "";
+            display: block;
+            background: $money-dark-green;
+            position: absolute;
+            top: -1.9rem;
+            right: -1.9rem;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 4rem;
+        }
+        .roundedge{
+            &:before{
+                content: "";
+                display: block;
+                background: $money-dark-green;
+                position: absolute;
+                bottom: -1.9rem;
+                left: -1.9rem;
+                width: 4rem;
+                height: 4rem;
+                border-radius: 4rem;
+            }
+            &:after{
+                content: "";
+                display: block;
+                background: $money-dark-green;
+                position: absolute;
+                bottom: -1.9rem;
+                right: -1.9rem;
+                width: 4rem;
+                height: 4rem;
+                border-radius: 4rem;
+            }
+        }
+    }
+}
+.wallet-inside{
+    // padding: 2rem;
+    background-color: yellow;
+
+    span{
+        width: 10rem;
+        height: 10rem;
+        background-color: $money-dark-green;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10rem;
+    
+        &:before{
+            content: "$";
+            display: block;
+            background: $money-dark-green;
+            position: absolute;
+            top: 50%;
+            right: -6rem;
+            transform: translateY(-50%);
+            width: 4rem;
+            height: 4rem;
+            border-radius: 4rem;
+            font-size: 3rem;
+            line-height: 4rem;
+            font-family: ShowGothic;
+            color: $money-light-green;
+        }
+        &:after{
+            content: "$";
+            display: block;
+            background: $money-dark-green;
+            position: absolute;
+            top: 50%;
+            left: -6rem;
+            transform: translateY(-50%);
+            width: 4rem;
+            height: 4rem;
+            border-radius: 4rem;
+            font-size: 3rem;
+            line-height: 4rem;
+            font-family: ShowGothic;
+            color: $money-light-green;
+        }
+    }
+    .money{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%) scale(0.8);
+        color: $money-light-green;
+    }
+   
+}

@@ -205,3 +205,26 @@
     transform: translate3d(4px, 0, 0) rotateY(180deg);
   }
 }
+
+@keyframes text-pulse{
+  0%{
+    font-size: 10rem;
+  }
+  30%{
+    font-size: 14rem;
+    padding: 6rem;
+  }
+  60%{
+    font-size: 9rem;
+    padding: 3rem;
+  }
+  80%{
+    font-size: 12rem;
+    padding: 4rem
+  }
+  100%{
+    font-size: 10rem;
+    padding: 3rem;
+  }
+
+}

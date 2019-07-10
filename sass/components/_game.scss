@@ -12,7 +12,7 @@
         // position: absolute;
         // transform-origin: -100% -100%;
         margin: auto auto;
-        margin-top:40rem;
+        margin-top:30rem;
         border: 1rem solid $light-green ;
         width: 90rem;
         height: 45rem;
@@ -53,11 +53,49 @@
                 cursor: pointer;
                 color: $light-green;
             }
+        }
+    }
 
+    .gameaftermath{
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background-color: #00000080;
+
+        .win, .lose, .newhand, .blackjack{
+            @include absCenter;
+            border: 1rem solid $light-green ;
+            border-radius: 2rem;
+            background-color: $board-green;
+            font-family: ShowGothic;
+            font-size: 10rem;
+            text-align: center;
+            padding: 3rem 3rem;;
+            line-height: 10rem;
+            color: $light-green;
+        }
+        .win{
+
+        }
+        .lose{
+
+        }
+        .newhand{
 
         }
     }
+
+    
 }
+// #game > *:not(.gameaftermath){
+//      filter: blur(0.5rem);
+//      z-index: 3;
+//  }
+//  .game-background{
+//     filter: blur(0.5rem);
+//     z-index: 0;
+//  }
+ 
 
 
 
@@ -76,7 +114,7 @@
         
         //MEDIA QUERY NEEDED
         // margin-top: 35rem;
-        margin-top: 45rem;
+        margin-top: 34rem;
         // width: 80rem;
         width: 100rem;
 
@@ -151,7 +189,10 @@
                 // background-color: yellow;
                 height: 100%;
                 margin: auto auto;
-        
+
+                pre{
+                    display: inline-block;
+                    }
         
                 .prebet{
                     display: grid;
@@ -162,13 +203,17 @@
                     justify-items: center;
                     padding-top: 2rem;
                  
-                    .bet pre{
-                        display: inline-block;
+                    .bet {
+                        justify-self: end;
+                        
+                    }
+                    .reset{
+                        justify-self: start;
                     }
                 }
                 .postbet{
                     display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-columns: repeat(5, max-content) ;
                     grid-gap: 2rem;
                     // background-color: blue;
                     align-items: center;
@@ -176,6 +221,22 @@
                     padding-top: 2rem;
 
                     .nosplit{
+                        border: 0.5rem solid $dark-green-transparent;
+                        color: $dark-green-transparent;
+                    }
+                    .nodoubledown{
+                        border: 0.5rem solid $dark-green-transparent;
+                        color: $dark-green-transparent;
+                    }
+                    .noace{
+                        border: 0.5rem solid $dark-green-transparent;
+                        color: $dark-green-transparent;
+                    }
+                    .nohit{
+                        border: 0.5rem solid $dark-green-transparent;
+                        color: $dark-green-transparent;
+                    }
+                    .nostand{
                         border: 0.5rem solid $dark-green-transparent;
                         color: $dark-green-transparent;
                     }
@@ -202,4 +263,9 @@
     visibility: hidden;
     display: none;
   
+}
+.text-pulse{
+    
+    animation: text-pulse 2s ease-in-out;
+    animation-iteration-count: 3;
 }

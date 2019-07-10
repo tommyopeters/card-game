@@ -29,9 +29,27 @@ class Deck{
         let suits = ['spadesuit', 'heartsuit', 'diamondsuit', 'clubsuit'] 
         
         let card = (suit, value) => {
-            let name = value + ' of ' + suit;
+            let facevalue = value;
+            switch (value) {
+                case 1:
+                    facevalue = 'A'
+                    break;
+                case 11: 
+                    facevalue = 'J'
+                    value = 10;
+                    break;
+                case 12: 
+                    facevalue = 'Q'
+                    value = 10;
+                break;
+                case 13: 
+                    facevalue = 'K'
+                    value = 10;
+                break;
+            }
+            let name = facevalue + ' of ' + suit;
 
-            return {'name': name, 'suit': suit, 'value':value}
+            return {'name': name, 'suit': suit, 'value':value, 'facevalue': facevalue}
         }
         
         for (let s = 0; s < suits.length; s++){
@@ -39,10 +57,7 @@ class Deck{
                 this.deck.push(card(suits[s], values[v]))
             } 
         }
-    }
 
-    printDeck(){
-        
     }
 
     shuffle(){
@@ -54,6 +69,7 @@ class Deck{
             this.deck[c] = this.deck[randomindex];
             this.deck[randomindex] = tempval;
         }
+        
         
     }
 

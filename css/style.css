@@ -155,6 +155,22 @@
   40%, 60% {
     transform: translate3d(4px, 0, 0) rotateY(180deg); } }
 
+@keyframes text-pulse {
+  0% {
+    font-size: 10rem; }
+  30% {
+    font-size: 14rem;
+    padding: 6rem; }
+  60% {
+    font-size: 9rem;
+    padding: 3rem; }
+  80% {
+    font-size: 12rem;
+    padding: 4rem; }
+  100% {
+    font-size: 10rem;
+    padding: 3rem; } }
+
 *,
 *::after,
 *::before {
@@ -415,7 +431,7 @@ input[type=submit]:hover {
   position: fixed; }
   #game .startgame {
     margin: auto auto;
-    margin-top: 40rem;
+    margin-top: 30rem;
     border: 1rem solid #C5EBC5;
     width: 90rem;
     height: 45rem;
@@ -447,6 +463,25 @@ input[type=submit]:hover {
         font-size: 10rem;
         cursor: pointer;
         color: #C5EBC5; }
+  #game .gameaftermath {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000080; }
+    #game .gameaftermath .win, #game .gameaftermath .lose, #game .gameaftermath .newhand, #game .gameaftermath .blackjack {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1rem solid #C5EBC5;
+      border-radius: 2rem;
+      background-color: #5e995e;
+      font-family: ShowGothic;
+      font-size: 10rem;
+      text-align: center;
+      padding: 3rem 3rem;
+      line-height: 10rem;
+      color: #C5EBC5; }
 
 .game-background {
   width: 100vw;
@@ -455,7 +490,7 @@ input[type=submit]:hover {
 
 .people {
   margin: auto auto;
-  margin-top: 45rem;
+  margin-top: 34rem;
   width: 100rem;
   border: 1rem solid #C5EBC5;
   width: 80rem;
@@ -509,6 +544,8 @@ input[type=submit]:hover {
   .people .actions {
     height: 100%;
     margin: auto auto; }
+    .people .actions pre {
+      display: inline-block; }
     .people .actions .prebet {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -516,16 +553,30 @@ input[type=submit]:hover {
       align-items: center;
       justify-items: center;
       padding-top: 2rem; }
-      .people .actions .prebet .bet pre {
-        display: inline-block; }
+      .people .actions .prebet .bet {
+        justify-self: end; }
+      .people .actions .prebet .reset {
+        justify-self: start; }
     .people .actions .postbet {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(5, max-content);
       grid-gap: 2rem;
       align-items: center;
       justify-items: center;
       padding-top: 2rem; }
       .people .actions .postbet .nosplit {
+        border: 0.5rem solid #84B58450;
+        color: #84B58450; }
+      .people .actions .postbet .nodoubledown {
+        border: 0.5rem solid #84B58450;
+        color: #84B58450; }
+      .people .actions .postbet .noace {
+        border: 0.5rem solid #84B58450;
+        color: #84B58450; }
+      .people .actions .postbet .nohit {
+        border: 0.5rem solid #84B58450;
+        color: #84B58450; }
+      .people .actions .postbet .nostand {
         border: 0.5rem solid #84B58450;
         color: #84B58450; }
 
@@ -544,13 +595,17 @@ input[type=submit]:hover {
   visibility: hidden;
   display: none; }
 
+.text-pulse {
+  animation: text-pulse 2s ease-in-out;
+  animation-iteration-count: 3; }
+
 .chipstable {
   transform-origin: center;
   transform: translateX(-50%) scale(0.5);
   position: absolute;
   left: 50%;
-  top: 82rem;
-  width: 40%; }
+  top: 72.5rem;
+  width: 50%; }
 
 .chips {
   padding: 2rem 0;
@@ -665,3 +720,129 @@ input[type=submit]:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+
+.a {
+  fill: #5e995e; }
+
+.a, .b, .c, .f {
+  fill-rule: evenodd; }
+
+.b, .d {
+  fill: #9bcc9b; }
+
+.c {
+  fill: #c5ebc5; }
+
+.f, .g {
+  fill: #5e875e; }
+
+.wallet {
+  width: 25rem;
+  background-color: #398E3D;
+  position: fixed;
+  top: 13rem;
+  left: 10rem;
+  height: 14rem;
+  font-family: Coegit;
+  font-size: 6rem;
+  text-align: center;
+  line-height: 15rem; }
+  .wallet-inset {
+    position: relative;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color: #A4D5A6;
+    margin: auto; }
+    .wallet-inset:before {
+      content: "";
+      display: block;
+      background: #398E3D;
+      position: absolute;
+      top: -1.9rem;
+      left: -1.9rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem; }
+    .wallet-inset:after {
+      content: "";
+      display: block;
+      background: #398E3D;
+      position: absolute;
+      top: -1.9rem;
+      right: -1.9rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem; }
+    .wallet-inset .roundedge:before {
+      content: "";
+      display: block;
+      background: #398E3D;
+      position: absolute;
+      bottom: -1.9rem;
+      left: -1.9rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem; }
+    .wallet-inset .roundedge:after {
+      content: "";
+      display: block;
+      background: #398E3D;
+      position: absolute;
+      bottom: -1.9rem;
+      right: -1.9rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem; }
+
+.wallet-inside {
+  background-color: yellow; }
+  .wallet-inside span {
+    width: 10rem;
+    height: 10rem;
+    background-color: #398E3D;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10rem; }
+    .wallet-inside span:before {
+      content: "$";
+      display: block;
+      background: #398E3D;
+      position: absolute;
+      top: 50%;
+      right: -6rem;
+      transform: translateY(-50%);
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem;
+      font-size: 3rem;
+      line-height: 4rem;
+      font-family: ShowGothic;
+      color: #A4D5A6; }
+    .wallet-inside span:after {
+      content: "$";
+      display: block;
+      background: #398E3D;
+      position: absolute;
+      top: 50%;
+      left: -6rem;
+      transform: translateY(-50%);
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem;
+      font-size: 3rem;
+      line-height: 4rem;
+      font-family: ShowGothic;
+      color: #A4D5A6; }
+  .wallet-inside .money {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    color: #A4D5A6; }
