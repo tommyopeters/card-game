@@ -1,18 +1,62 @@
 class GameEngine{
     constructor(){
+        this.Person = [];
+        this.Session = [];
+        this.sessionnumber = 0
         this.score = 0;
         this.cardinhand = 0;
+        this.doule = false;
+        this.acedouble = false;
+        this.wallet = 0;
+        this.aamount = 0;
+        this.split = false;
+        this.firstTwo = [];
+        this.blackjack = false;
+        this.playersum = 0;
+        this.dealersum = 0;
+        this.dealeremptyCards = {}
+        this.playeremptyCards = {}
+        this.dealerCards = [];
+        this.playerCards = [];
+        this.dealnumber = -1;
     }
-    printcard(index){
-        let emptycards = document.getElementsByClassName('empty');
-        let dealerempty = emptycards[index];
-        let playerempty = emptycards[index+6];
-        let playercard = this.Player.deal();
-        let dealercard = this.Dealer.deal();
+    
+    start(){
+        console.log(this.Session);
+        this.Session[this.sessionnumber] = [];
+        this.Session[this.sessionnumber][0] = new Deck();
+        this.Session[this.sessionnumber][0].generate();
+        this.Session[this.sessionnumber][0].shuffle();
         
+        this.Session[this.sessionnumber][1] = new Deck();
+        this.Session[this.sessionnumber][1].generate();
+        this.Session[this.sessionnumber][1].shuffle();
+
+        this.firstTwoCards();
+        
+        
+       
+    }
+    firstTwoCards(){
+        this.dealCard();
+        this.printCard();
+        this.dealCard();
+        this.printCard();
+        //         return this.firstTwo
+    }
+    dealCard(){
+        this.dealerCards.push(this.Session[this.sessionnumber][0].deal());
+        this.playerCards.push(this.Session[this.sessionnumber][1].deal());
+
+        this.dealnumber++;
+    }
+    printCard(){
+        this.dealeremptyCards = document.querySelectorAll('.dealer-bar .empty');
+        this.playeremptyCards = document.querySelectorAll('.player-bar .empty');
+
         let HTMLcardDealer = document.createElement('div');
         HTMLcardDealer.classList.add('cardcontainer');
-        if(dealercard.suit == 'spadesuit' || dealercard.suit == 'clubsuit'){
+        if(this.dealerCards[this.dealnumber].suit == 'spadesuit' || this.dealerCards[this.dealnumber].suit == 'clubsuit'){
             HTMLcardDealer.classList.add('cardgreen');
         }else{
             HTMLcardDealer.classList.add('cardred');
@@ -21,22 +65,22 @@ class GameEngine{
         HTMLcardDealer.innerHTML = `
             <div class="front">
                 <div class="top">
-                    <span> &${dealercard.suit}; </span>
+                    <span> &${this.dealerCards[this.dealnumber].suit}; </span>
                 </div>
-                <h1>${dealercard.value}</h1>
+                <h1>${this.dealerCards[this.dealnumber].value}</h1>
                 <div class="bottom">
-                    <span class="upside-down"> &${dealercard.suit}; </span>
+                    <span class="upside-down"> &${this.dealerCards[this.dealnumber].suit}; </span>
                 </div>
             </div>
             <div class="back"><div class="back-inner"></div></div>
         `;
-        dealerempty.parentNode.replaceChild(HTMLcardDealer, dealerempty);
+        this.dealeremptyCards[0].parentNode.replaceChild(HTMLcardDealer, this.dealeremptyCards[0]);
             
 
 
         let HTMLcardPlayer = document.createElement('div');
         HTMLcardPlayer.classList.add('cardcontainer');
-        if(playercard.suit == 'spadesuit' || playercard.suit == 'clubsuit'){
+        if(this.playerCards[this.dealnumber].suit == 'spadesuit' || this.playerCards[this.dealnumber].suit == 'clubsuit'){
             HTMLcardPlayer.classList.add('cardgreen');
         }else{
             HTMLcardPlayer.classList.add('cardred');
@@ -45,38 +89,58 @@ class GameEngine{
         HTMLcardPlayer.innerHTML = `
             <div class="front">
                 <div class="top">
-                    <span class="upside-up"> &${playercard.suit}; </span>
+                    <span class="upside-up"> &${this.playerCards[this.dealnumber].suit}; </span>
                 </div>
-                <h1 class="cardvalue">${playercard.value}</h1>
+                <h1 class="cardvalue">${this.playerCards[this.dealnumber].value}</h1>
                 <div class="bottom">
-                    <span class="upside-down"> &${playercard.suit}; </span>
+                    <span class="upside-down"> &${this.playerCards[this.dealnumber].suit}; </span>
                 </div>
             </div>
             <div class="back"><div class="back-inner"></div></div>
         `;
-        playerempty.parentNode.replaceChild(HTMLcardPlayer, playerempty);
+         this.playeremptyCards[0].parentNode.replaceChild(HTMLcardPlayer, this.playeremptyCards[0]);
 
-        HTMLcardPlayer.addEventListener('click', (e)=>{
-            let clicked = e.target;
-            console.log(e.target);
-            if(clicked.classList.contains('cardcontainer')){
-                clicked.classList.toggle('flipped');
-            }else if(clicked.parentNode.classList.contains('cardcontainer')){
-                clicked.parentNode.classList.toggle('flipped');
-            }else if(clicked.parentNode.parentNode.classList.contains('cardcontainer')){
-                clicked.parentNode.parentNode.classList.toggle('flipped');
-            }else if(clicked.parentNode.parentNode.parentNode.classList.contains('cardcontainer')){
-                clicked.parentNode.parentNode.parentNode.classList.toggle('flipped');
-            }
-            
-        })
-
-        this.cardinhand++;
+         this.cardinhand++;
     }
+    checkValues(){
 
-    
-    start(){
-        /*
+    }
+    checkForBlackjack(){
+        // return;
+        // this.blackjack = true
+        // endgame(){}
+    }
+    checkForDouble(){
+
+    }
+    checkSum(){
+
+    }
+    checkForAce(){
+
+    }
+    revealCard(){
+
+    }
+    revealDealerCard(){
+
+    }
+    endgame(){
+        // if this.blackjack == true{
+        //     BLACKJACK!
+        //     this.blackjack = false
+        // }
+        // if (dealer>player){
+        //     lose
+        // }else if(player<dealer){
+        //     win
+        // }else if(player==dealer){
+        //     Push
+        // }
+    }
+}
+
+ /*
         stand.addevebtlistener{
             revealDealerCard(){}
             stand(){
@@ -107,97 +171,6 @@ class GameEngine{
             checkvalues()
         }
         */
-
-
-        /*
-            firstTwoCards(){
-                dealCard(){}
-                printCard(){}
-                dealCard(){}
-                printCard(){}
-                return this.firstTwo
-            }
-
-            checkvalues(){
-                checkForBlackjack(this.firstTwo){
-                    return;
-                    this.blackjack = true
-                    endgame(){}
-                }
-                checkForDoubles(this.firstTwo){
-                    if not(){return}
-                    if doubles{
-                        this.double = true
-                        if ace(){
-                            this.acedouble = true
-                        }
-                        active doubledown and split buttons.....
-                    }
-                }
-                checksum(){
-                    check()
-                    updateSumValue()
-                    if(sum>=9 || sum<=11){
-                        activate doubledown
-                    }
-
-                }
-                checkforAce(){
-                    if this.double=true(){
-                            return
-                        }
-                    loop{
-                        if ace{
-                            activate ace button.....
-                            
-                        }
-                    }
-                }
-
-
-                
-            }
-            revealCard(){}
-
-            endgame(){
-                if this.blackjack == true{
-                    BLACKJACK!
-                    this.blackjack = false
-                }
-                if (dealer>player){
-                    lose
-                }else if(player<dealer){
-                    win
-                }else if(player==dealer){
-                    Push
-                }
-            }
-            if this.split = true;{
-                Start new session
-            }
-            
-        */
-
-        this.Player = new Deck();
-        this.Player.generateDeck();
-        this.Player.shuffle();
-
-
-        this.Dealer = new Deck();
-        this.Dealer.generateDeck();
-        this.Dealer.shuffle();
-
-        // this.People = [Dealer,Player];
-
-        // this.People.forEach(person => {
-        //     person = new Deck();
-        //     person.generateDeck();
-        //     person.shuffle();
-        // });
-
-        this.printcard(this.cardinhand);
-    }
-}
 
 
 
