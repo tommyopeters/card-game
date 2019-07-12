@@ -61,8 +61,11 @@
         width: 100vw;
         height: 100vh;
         background-color: #00000080;
+        z-index: 5;
+        
 
-        .win, .lose, .newhand, .blackjack{
+
+        .gameover, .win, .draw, .lose, .newhand, .blackjack{
             @include absCenter;
             border: 1rem solid $light-green ;
             border-radius: 2rem;
@@ -73,15 +76,6 @@
             padding: 3rem 3rem;;
             line-height: 10rem;
             color: $light-green;
-        }
-        .win{
-
-        }
-        .lose{
-
-        }
-        .newhand{
-
         }
     }
 
@@ -267,5 +261,12 @@
 .text-pulse{
     
     animation: text-pulse 2s ease-in-out;
-    animation-iteration-count: 3;
+    animation-iteration-count: 1;
+}
+.animatein{
+    animation: fadeIn 500ms ease-in-out;
+}
+
+.animateout{
+    animation: fadeOut 500ms ease-in-out;
 }

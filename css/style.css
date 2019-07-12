@@ -125,6 +125,12 @@
   100% {
     opacity: 1; } }
 
+@keyframes fadeOut {
+  100% {
+    opacity: 0; }
+  0% {
+    opacity: 1; } }
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0); }
@@ -467,8 +473,9 @@ input[type=submit]:hover {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: #00000080; }
-    #game .gameaftermath .win, #game .gameaftermath .lose, #game .gameaftermath .newhand, #game .gameaftermath .blackjack {
+    background-color: #00000080;
+    z-index: 5; }
+    #game .gameaftermath .gameover, #game .gameaftermath .win, #game .gameaftermath .draw, #game .gameaftermath .lose, #game .gameaftermath .newhand, #game .gameaftermath .blackjack {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -597,7 +604,13 @@ input[type=submit]:hover {
 
 .text-pulse {
   animation: text-pulse 2s ease-in-out;
-  animation-iteration-count: 3; }
+  animation-iteration-count: 1; }
+
+.animatein {
+  animation: fadeIn 500ms ease-in-out; }
+
+.animateout {
+  animation: fadeOut 500ms ease-in-out; }
 
 .chipstable {
   transform-origin: center;

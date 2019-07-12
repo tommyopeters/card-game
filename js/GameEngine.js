@@ -7,8 +7,8 @@ class GameEngine{
         this.cardinhand = 0;
         this.doule = false;
         this.acedouble = false;
-        this.wallet = 0;
-        this.aamount = 0;
+        this.wallet = 1000;
+        this.amount = 0;
         this.split = false;
         this.firstTwo = [];
         this.blackjack = false;
@@ -22,7 +22,6 @@ class GameEngine{
     }
     
     start(){
-        console.log(this.Session);
         this.Session[this.sessionnumber] = [];
         this.Session[this.sessionnumber][0] = new Deck();
         this.Session[this.sessionnumber][0].generate();
@@ -34,7 +33,7 @@ class GameEngine{
 
         this.firstTwoCards();
         
-        
+        this.sessionnumber++
        
     }
     firstTwoCards(){
@@ -42,7 +41,21 @@ class GameEngine{
         this.printCard();
         this.dealCard();
         this.printCard();
-        //         return this.firstTwo
+        let playerstwo = []
+        playerstwo.push(this.playerCards[0]);
+        playerstwo.push(this.playerCards[1]);
+        let dealerstwo = []
+        dealerstwo.push(this.dealerCards[0]);
+        dealerstwo.push(this.dealerCards[1]);
+
+        this.firstTwo.push(dealerstwo);
+        this.firstTwo.push(playerstwo);
+
+
+
+        this.revealCard(1, this.playerCards.length);
+        this.revealCard(0, (this.dealerCards.length-1));
+        this.checkValues();
     }
     dealCard(){
         this.dealerCards.push(this.Session[this.sessionnumber][0].deal());
@@ -67,7 +80,7 @@ class GameEngine{
                 <div class="top">
                     <span> &${this.dealerCards[this.dealnumber].suit}; </span>
                 </div>
-                <h1>${this.dealerCards[this.dealnumber].value}</h1>
+                <h1>${this.dealerCards[this.dealnumber].facevalue}</h1>
                 <div class="bottom">
                     <span class="upside-down"> &${this.dealerCards[this.dealnumber].suit}; </span>
                 </div>
@@ -91,7 +104,7 @@ class GameEngine{
                 <div class="top">
                     <span class="upside-up"> &${this.playerCards[this.dealnumber].suit}; </span>
                 </div>
-                <h1 class="cardvalue">${this.playerCards[this.dealnumber].value}</h1>
+                <h1 class="cardvalue">${this.playerCards[this.dealnumber].facevalue}</h1>
                 <div class="bottom">
                     <span class="upside-down"> &${this.playerCards[this.dealnumber].suit}; </span>
                 </div>
@@ -102,13 +115,78 @@ class GameEngine{
 
          this.cardinhand++;
     }
-    checkValues(){
-
+    revealCard(person, number){
+        let playerreveals = document.querySelectorAll('.player-bar .cardcontainer');
+        let dealerreveals = document.querySelectorAll('.dealer-bar .cardcontainer');
+        let i = 0;
+        if(person==1){
+            while (i < number){
+                playerreveals[i].classList.remove('flipped');
+                    i++;
+            }
+        }else if(person == 0){
+            while (i < number){
+                dealerreveals[i].classList.remove('flipped');
+                i++;
+            }
+        }
     }
+
+
+    checkValues(){
+        
+        this.checkSum();
+        this.checkForBlackjack();
+        this.checkForDouble();
+        this.checkSum();
+        this.checkForAce();
+    }
+
     checkForBlackjack(){
-        // return;
-        // this.blackjack = true
-        // endgame(){}
+
+        if(this.firstTwo[1][0].value == 1){
+            this.firstTwo[1][0].value = 11;
+        }else if(this.firstTwo[1][1].value == 1){
+            this.firstTwo[1][1].value = 11;
+        }
+        if(this.firstTwo[0][0].value == 1){
+            this.firstTwo[0][0].value = 11;
+        }else if(this.firstTwo[0][1].value == 1){
+            this.firstTwo[0][1].value = 11;
+        }
+        
+
+        let Psum = this.firstTwo[1][0].value + this.firstTwo[1][1].value;
+        let Dsum = this.firstTwo[0][0].value + this.firstTwo[0][1].value;
+
+        console.log(Psum);
+
+        if(Psum == 21 && Dsum == 21){
+            setTimeout(() => {
+                document.querySelector('.people').classList.add('apply-shake');
+                document.querySelector('.people').addEventListener("animationend", (e) => {
+                    document.querySelector('.people').classList.remove("apply-shake");
+            })
+                this.endgame('draw');
+            }, 100);
+        }else if(Psum == 21){
+            setTimeout(() => {
+                document.querySelector('.people').classList.add('apply-shake');
+                document.querySelector('.people').addEventListener("animationend", (e) => {
+                    document.querySelector('.people').classList.remove("apply-shake");
+                })
+                this.endgame('blackjack');
+            }, 100);
+        }else if(Dsum == 21){
+            setTimeout(() => {
+                document.querySelector('.people').classList.add('apply-shake');
+                document.querySelector('.people').addEventListener("animationend", (e) => {
+                    document.querySelector('.people').classList.remove("apply-shake");
+                })
+                this.endgame('lose');
+            }, 100);
+        }
+
     }
     checkForDouble(){
 
@@ -119,13 +197,7 @@ class GameEngine{
     checkForAce(){
 
     }
-    revealCard(){
-
-    }
-    revealDealerCard(){
-
-    }
-    endgame(){
+    endgame(message){
         // if this.blackjack == true{
         //     BLACKJACK!
         //     this.blackjack = false
@@ -137,9 +209,150 @@ class GameEngine{
         // }else if(player==dealer){
         //     Push
         // }
+
+        if(message == 'draw'){
+            setTimeout(() => {
+                document.querySelector('.gameaftermath').classList.remove('hidden');
+                setTimeout(() => {
+                    document.querySelector('.draw').classList.remove('hidden');
+                    document.querySelector('.draw').addEventListener('animationend',()=>{
+                        document.querySelector('.draw').classList.remove('animatein');
+                        document.querySelector('.draw').classList.add('text-pulse');
+
+                        document.querySelector('html').addEventListener('click',()=>{
+                            document.querySelector('.draw').classList.remove('text-pulse');
+                            document.querySelector('.draw').classList.add('animateout');
+                            document.querySelector('.gameaftermath').classList.add('animateout');
+
+                            document.querySelector('.draw').addEventListener('animationend', ()=>{
+                                document.querySelector('.draw').classList.add('hidden');
+                                document.querySelector('.draw').classList.remove('animateout');
+                            })
+                            document.querySelector('.gameaftermath').addEventListener('animationend', ()=>{
+                                document.querySelector('.gameaftermath').classList.add('hidden');
+                                document.querySelector('.gameaftermath').classList.remove('animateout');
+                                this.resetTable();
+                                this.resetBet();
+                            })
+                        })
+                    })
+                }, 500);                
+            }, 500);
+
+            
+            this.wallet += this.amount;
+            this.amount = 0;
+
+        }else if(message == 'blackjack'){
+            setTimeout(() => {
+                document.querySelector('.gameaftermath').classList.remove('hidden');
+                setTimeout(() => {
+                    document.querySelector('.blackjack').classList.remove('hidden');
+                    document.querySelector('.blackjack').addEventListener('animationend',()=>{
+                        document.querySelector('.blackjack').classList.remove('animatein');
+                        document.querySelector('.blackjack').classList.add('text-pulse');
+
+                        document.querySelector('html').addEventListener('click',()=>{
+                            document.querySelector('.blackjack').classList.remove('text-pulse');
+                            document.querySelector('.blackjack').classList.add('animateout');
+                            document.querySelector('.gameaftermath').classList.add('animateout');
+
+                            document.querySelector('.blackjack').addEventListener('animationend', ()=>{
+                                document.querySelector('.blackjack').classList.add('hidden');
+                                document.querySelector('.blackjack').classList.remove('animateout');
+                            })
+                            document.querySelector('.gameaftermath').addEventListener('animationend', ()=>{
+                                document.querySelector('.gameaftermath').classList.add('hidden');
+                                document.querySelector('.gameaftermath').classList.remove('animateout');
+                                this.resetTable();
+                                this.resetBet();
+                            })
+                        })
+                    })
+                }, 500);
+            }, 500);
+            
+            this.wallet += (1.5 * this.amount);
+            this.amount = 0;
+
+        }else if(message == 'lose'){
+            setTimeout(() => {
+                document.querySelector('.gameaftermath').classList.remove('hidden');
+                setTimeout(() => {
+                    document.querySelector('.lose').classList.remove('hidden');
+                    document.querySelector('.lose').addEventListener('animationend',()=>{
+                        document.querySelector('.lose').classList.remove('animatein');
+                        document.querySelector('.lose').classList.add('text-pulse');
+
+                        document.querySelector('.lose').addEventListener('animationend',()=>{
+                            document.querySelector('.lose').classList.remove('text-pulse');
+                            document.querySelector('.lose').classList.add('animateout');
+
+                            document.querySelector('.lose').addEventListener('animationend', ()=>{
+                                console.log(message);
+                                document.querySelector('.lose').classList.add('animatein');
+                                document.querySelector('.lose').classList.add('hidden');
+                                document.querySelector('.lose').classList.remove('animateout');
+                                
+                                
+                                if(this.wallet > 0){
+                                    document.querySelector('.newhand').classList.remove('hidden');
+                                    document.querySelector('.newhand').addEventListener('animationend',()=>{
+                                        document.querySelector('.newhand').classList.remove('animatein');
+                                        document.querySelector('.newhand').classList.add('text-pulse');
+
+                                        document.querySelector('.newhand').addEventListener('animationend',()=>{
+                                            document.querySelector('.newhand').classList.remove('text-pulse');
+                                            document.querySelector('.newhand').classList.add('animateout');
+                                            document.querySelector('.gameaftermath').classList.add('animateout');
+
+                                            document.querySelector('.newhand').addEventListener('animationend', ()=>{
+                                                document.querySelector('.newhand').classList.add('hidden');
+                                                document.querySelector('.newhand').classList.remove('animateout');
+                                                document.querySelector('.gameaftermath').classList.add('animateout');
+                                                document.querySelector('.gameaftermath').addEventListener('animationend', ()=>{
+                                                    document.querySelector('.gameaftermath').classList.add('hidden');
+                                                    document.querySelector('.gameaftermath').classList.remove('animateout');
+                                                    this.resetTable();
+                                                    this.resetBet();
+                                                })
+                                            })
+                                        })
+                                    })
+                                }
+                                
+                            })
+                        })
+                    })
+                }, 500);
+            }, 500);
+
+            this.amount = 0;
+        }
+    }
+
+    resetTable(){
+        let cardcontainers = document.querySelectorAll('.cardcontainer');
+        cardcontainers.forEach(card => {
+            console.log(card.innerHTML);
+            let newemptycard = document.createElement('div');
+            newemptycard.classList.add('empty');
+            card.parentNode.replaceChild(newemptycard, card);
+            
+        });
+    }
+    resetBet(){
+        
+        document.querySelector('.prebet').style.removeProperty('display');
+        document.querySelector('.postbet').classList.add('hidden');
+        document.querySelector('.chipstable').style.removeProperty('display');
+        document.getElementById('amount').innerHTML = this.amount;
+        
+
     }
 }
 
+    
  /*
         stand.addevebtlistener{
             revealDealerCard(){}
@@ -209,30 +422,35 @@ for(let i=0; i<pokerchips.length; i++){
         
         if(pokerchips[i].classList.contains('white')){
             amountbet+=1;
+            if(amountbet>Game.wallet){amountbet=Game.wallet};
             if(amountbet>500){amountbet=500};
             document.getElementById('amount').innerHTML = amountbet;
         }
         if(pokerchips[i].classList.contains('red')){
             amountbet+=5;
+            if(amountbet>Game.wallet){amountbet=Game.wallet};
             if(amountbet>500){amountbet=500};
             document.getElementById('amount').innerHTML = amountbet;
         }
         if(pokerchips[i].classList.contains('blue')){
             amountbet+=10;
+            if(amountbet>Game.wallet){amountbet=Game.wallet};
             if(amountbet>500){amountbet=500};
             document.getElementById('amount').innerHTML = amountbet;
         }
         if(pokerchips[i].classList.contains('green')){
             amountbet+=25;
+            if(amountbet>Game.wallet){amountbet=Game.wallet};
             if(amountbet>500){amountbet=500};
             document.getElementById('amount').innerHTML = amountbet;
         }
         if(pokerchips[i].classList.contains('black')){
             amountbet+=100;
+            if(amountbet>Game.wallet){amountbet=Game.wallet};
             if(amountbet>500){amountbet=500};
             document.getElementById('amount').innerHTML = amountbet;
         }
-
+        console.log(amountbet)
     })
 }
 
@@ -274,3 +492,5 @@ document.querySelector('.bet').addEventListener('click', ()=>{
 
 
 document.querySelector('.yes').click();
+// amountbet = 200;
+document.querySelector('.bet').click();

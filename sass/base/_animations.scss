@@ -152,6 +152,14 @@
     opacity: 1;
   }
 }
+@keyframes fadeOut{
+  100%{
+    opacity: 0;
+  }
+  0%{
+    opacity: 1;
+  }
+}
 
 @keyframes shake {
   10%, 90% {
@@ -228,3 +236,4 @@
   }
 
 }
+
